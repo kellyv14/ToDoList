@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct NewToDoView: View {
-        
+    
+    @Binding var showNewTask: Bool
+    @Bindable var ToDoItem: ToDoItem
+    @Environment(\.modelContext) var modelContext
+    
     var body: some View {
 
     VStack { //start of VStack
@@ -16,13 +20,13 @@ struct NewToDoView: View {
             .font(.title)
             .fontWeight(.bold)
             
-        TextField("Enter the task description...", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
+        TextField("Enter the task description...", text: $ToDoItem.title)
             .padding()
             .background(Color(.systemGroupedBackground))
             .cornerRadius(15)
             .padding()
         
-        Toggle(isOn: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Is On@*/.constant(true)/*@END_MENU_TOKEN@*/) {
+        Toggle(isOn: $ToDoItem.isImportant) {
             Text("Is it important?")
         }
         
@@ -36,8 +40,13 @@ struct NewToDoView: View {
     .padding()
         }
         
+    func addToDo(){
+        let toDo = ToDoList.ToDoItem(title: ToDoItem.title, isImportant: ToDoItem.isImportant)
+        modelContext.insert(toDo)
+    }
+    
         }
 
 #Preview {
-    NewToDoView()
+   
 }
