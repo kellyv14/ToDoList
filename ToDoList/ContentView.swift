@@ -41,6 +41,8 @@ struct ContentView: View { //content view start
                     if toDoItem.isImportant{
                         Text("‼️" + toDoItem.title)
                     }
+                    else {
+                    Text(toDoItem.title)}
                 }
             }
         .listStyle(.plain)

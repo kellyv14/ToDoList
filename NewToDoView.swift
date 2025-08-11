@@ -31,6 +31,8 @@ struct NewToDoView: View {
         }
         
         Button{
+        addToDo()
+        showNewTask = false
         }
         label: {
             Text("Save")
@@ -48,5 +50,5 @@ struct NewToDoView: View {
         }
 
 #Preview {
-   
+    NewToDoView(showNewTask: .constant(false), ToDoItem: ToDoItem(title: "", isImportant: false))
 }
